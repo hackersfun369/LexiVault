@@ -61,21 +61,37 @@ Unlike standard compressors, LexiVault is **Language-Aware**.
 - `lexivault_driver/`: The Rust-based Windows Minifilter driver responsible for real-time I/O handling and buffer management.
 - `lexivault_service/`: A User-Mode diagnostic and optimization service for background Dictionary Training and AST-based semantic preprocessing.
 
-## 🛠️ Getting Started
-### Prerequisites
-- [Rust](https://rustup.rs/) (Stable/Nightly)
-- [Enterprise Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) for driver compilation.
+## 🖼️ Windows Native Integration
+LexiVault is designed for permanent, seamless use within the Windows ecosystem.
 
-### Build & Test
-1. **Core Library**:
+### 1. Shell Context Menu
+Manage your files directly from Windows Explorer.
+- **Action**: Right-click any file or folder -> **LexiVault** -> **Compress/Decompress**.
+- **Installation**: Apply `lexivault_shell.reg` to register the native context menu.
+
+### 2. LexiVault Management Hub (App)
+A permanent system resident for real-time monitoring.
+- **System Tray**: Runs as a background taskbar icon for instant status checks.
+- **Dashboard**: High-aesthetics visualization of storage savings and I/O performance.
+- **Engine Control**: Switch transparency algorithms (LZ4/Zstd) on the fly.
+
+## 🛠️ Build Instructions
+### Prerequisites
+- [Rust](https://rustup.rs/)
+- [Node.js & npm](https://nodejs.org/)
+- [Windows WDK](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) (For kernel driver)
+
+### Distribution Build
+1. **CLI & Shell Integration**:
    ```bash
-   cd lexivault_lib
-   cargo test --test integration_test
+   cd lexivault_cli
+   cargo build --release
    ```
-2. **Optimization Service**:
+2. **Native Management Hub**:
    ```bash
-   cd lexivault_service
-   cargo check
+   cd lexivault_ui
+   npm install
+   npm run tauri build
    ```
 
 ## ⚖️ License
