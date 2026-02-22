@@ -83,5 +83,3 @@ Unlike standard compressors, LexiVault is **Language-Aware**.
 ## ⚖️ License
 LexiVault is provided for educational and research-level kernel development purposes. Ensure you enable **Test-Signing** mode in Windows before attempting to load the driver.
 
----
-*Created by Antigravity AI for HackersFun369.*
