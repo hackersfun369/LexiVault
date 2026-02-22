@@ -1,0 +1,9 @@
+C:\Drive_D\webdev\Compressor\compressor_service\target\debug\deps\tree_sitter-9c70f668e614baf0.d: C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\lib.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\ffi.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\util.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\./bindings.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\../include/tree_sitter/parser.h
+
+C:\Drive_D\webdev\Compressor\compressor_service\target\debug\deps\libtree_sitter-9c70f668e614baf0.rmeta: C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\lib.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\ffi.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\util.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\./bindings.rs C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\../include/tree_sitter/parser.h
+
+C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\lib.rs:
+C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\ffi.rs:
+C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\util.rs:
+C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\./bindings.rs:
+C:\Users\sathy\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tree-sitter-0.20.10\binding_rust\../include/tree_sitter/parser.h:

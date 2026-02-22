@@ -1,0 +1,33 @@
+[package]
+name = "lexivault_driver"
+version = "0.1.0"
+edition = "2024"
+
+[package.metadata.wdk.driver-model]
+driver-type = "FileSystemMinifilter"
+kmdf-version-major = 1
+target-kmdf-version-minor = 33
+
+[lib]
+crate-type = ["cdylib"]
+
+[build-dependencies]
+wdk-build = "0.5.1"
+
+[dependencies]
+lexivault_lib = { path = "../lib_compressor" }
+wdk = "0.4.1"
+wdk-alloc = "0.4.1"
+wdk-panic = "0.4.1"
+wdk-sys = "0.5.1"
+
+[features]
+default = []
+nightly = ["wdk/nightly", "wdk-sys/nightly"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+lto = true
+panic = "abort"

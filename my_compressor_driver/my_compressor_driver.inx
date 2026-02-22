@@ -1,0 +1,62 @@
+;
+; my_compressor_driver.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = ; TODO: specify appropriate Class
+ClassGuid   = ; TODO: specify appropriate ClassGuid
+Provider    = %ManufacturerName%
+CatalogFile = my_compressor_driver.cat
+DriverVer   = ; TODO: set DriverVer in stampinf property pages
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+my_compressor_driver.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName% = Standard,NT$ARCH$.10.0...16299 ; %13% support introduced in build 16299
+
+[Standard.NT$ARCH$.10.0...16299]
+%my_compressor_driver.DeviceDesc% = my_compressor_driver_Device, Root\my_compressor_driver ; TODO: edit hw-id
+
+[my_compressor_driver_Device.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+my_compressor_driver.sys
+
+;-------------- Service installation
+[my_compressor_driver_Device.NT.Services]
+AddService = my_compressor_driver,%SPSVCINST_ASSOCSERVICE%, my_compressor_driver_Service_Inst
+
+; -------------- KMDF driver install sections
+[my_compressor_driver_Service_Inst]
+DisplayName    = %my_compressor_driver.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\my_compressor_driver.sys
+
+[my_compressor_driver_Device.NT.Wdf]
+KmdfService = my_compressor_driver, my_compressor_driver_wdfsect
+
+[my_compressor_driver_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+ManufacturerName = "" ;TODO: Replace with your manufacturer name
+DiskName = "KMDF Installation Disk"
+my_compressor_driver.DeviceDesc = ""
+my_compressor_driver.SVCDESC = ""

@@ -1,0 +1,19 @@
+# Rust
+/target
+Cargo.lock
+
+# Windows
+*.pdb
+*.obj
+*.sys
+*.inf
+*.log
+*.tmp
+build_error.txt
+build_error_fix.txt
+test_error.txt
+test_output.txt
+
+# OS
+.DS_Store
+Thumbs.db
