@@ -1,9 +1,9 @@
 # LexiVault: High-Performance Transparent Lossless Compression
 
-LexiVault is a next-generation Windows file system minifilter driver and optimization suite that provides transparent, bit-identical lossless compression. It is specifically designed for developers, achieving ultra-high-speed I/O while significantly reducing the disk footprint of source code repositories and binaries.
+LexiVault is a next-generation Windows file system minifilter driver and optimization suite that provides transparent, bit-identical lossless compression. It is specifically designed for developers, achieving ultra-high-speed Input/Output (I/O) while significantly reducing the disk footprint of source code repositories and binaries.
 
-## � Empirical Benchmarks
-Native Rust benchmarks performed on a **10MB representative payload** on local NVMe hardware.
+## 📊 Empirical Benchmarks
+Native Rust benchmarks performed on a **10MB representative payload** on local Non-Volatile Memory Express (NVMe) hardware.
 
 ### Speed vs. Throughput
 | Method | Operation | Throughput | Latency (10MB) |
@@ -35,38 +35,36 @@ Testing on `test_sample.java` (1,242 bytes):
 ## 🛠️ How it Works
 
 ### 1. Kernel Minifilter Architecture
-LexiVault sits as a native Windows File System Minifilter at a high altitude.
-- **IRP Interception**: Intercepts `IRP_MJ_READ` and `IRP_MJ_WRITE` requests.
-- **Buffer Swapping**: Uses `post_read` callbacks to decompress data blocks into the system buffer before the application sees it.
-- **Reparse Points**: Custom NTFS Reparse Tags trigger the LexiVault driver only when a tagged file is accessed.
+LexiVault sits as a native Windows File System Minifilter at a high altitude within the operating system's storage stack.
+- **I/O Request Packet (IRP) Interception**: The driver intercepts standard filesystem requests like `IRP_MJ_READ` and `IRP_MJ_WRITE` before they reach the physical disk.
+- **Buffer Swapping**: Uses "Post-Operation" callbacks to decompress data blocks into the system buffer, ensuring that the calling application (like an Integrated Development Environment (IDE)) sees uncompressed data.
+- **Reparse Points**: Custom New Technology File System (NTFS) Reparse Tags trigger the LexiVault driver only when a specifically tagged compressed file is accessed.
 
 ### 2. Semantic Preprocessing (The "Lexi" in LexiVault)
 Unlike standard compressors, LexiVault is **Language-Aware**.
-- **Tree-sitter Parsing**: The `lexivault_service` uses Tree-sitter to parse source code into an AST.
-- **Tokenization**: Keywords and common identifiers are replaced with short binary tokens, reducing entropy before the Zstd engine even starts.
+- **Abstract Syntax Tree (AST) Parsing**: The `lexivault_service` uses the Tree-sitter library to parse source code into a structured AST.
+- **Semantic Tokenization**: Repetitive keywords and common identifiers are replaced with short binary tokens, reducing the mathematical complexity (entropy) before the Zstandard engine processes the data.
 
 ### 3. Cryptographic Integrity
-- **Merkle Tree**: Files are divided into 64KB chunks. A Merkle Tree is built for every file, with leaf hashes stored in the `:COMPR_INDEX` Alternate Data Stream (ADS).
-- **SHA-NI Acceleration**: Uses Intel SHA hardware instructions to verify data integrity in microseconds during the read path.
+- **Merkle Tree (Hash Tree)**: Files are divided into 64 Kilobyte (KB) chunks. A Merkle Tree is built for every file, providing a cryptographic "Chain of Trust" that ensures no data corruption occurs silently.
+- **Alternate Data Stream (ADS)**: The Merkle leaf hashes and block indices are stored in a hidden sidecar stream named `:COMPR_INDEX`, keeping the main data stream clean and compatible with standard tools.
+- **Secure Hash Algorithm (SHA) NI Acceleration**: Uses dedicated Intel Secure Hash Algorithm New Instructions (SHA-NI) to verify data integrity in microseconds without impacting the overall system performance.
 
-## ✨ Core Features
-- **0% Data Loss**: Verified bit-identical recovery via integration test suites.
-- **no_std Kernel Engine**: Core logic designed for memory-safe execution in the Windows Kernel.
-- **Sparse File Support**: Efficiently manages on-disk cluster allocation.
-- **Dynamic Workload Profiling**: Switches between LZ4 (Hot/Build) and Zstd (Cold/Archive).
+## ✨ Core Features Explained
+- **0% Data Loss**: Guaranteed bit-identical recovery for every byte, verified via automated Merkle Tree validation at the kernel level.
+- **Memory-Safe Kernel Engine**: Built using Rust's `no_std` (no standard library) environment to eliminate common memory vulnerabilities (like buffer overflows) within the Windows Kernel.
+- **Sparse File Support**: Dynamically manages on-disk cluster allocation so that Windows only allocates physical space for the actual compressed bytes, maximizing available disk space.
+- **Hybrid Workload Profiling**: Automatically uses LZ4 for critical, low-latency files (like Build artifacts) and high-level Zstandard (Zstd) for maximum archival density.
 
 ## 🏗️ Project Structure
-- `lexivault_lib/`: `no_std` hybrid engine and Merkle Tree logic.
-- `lexivault_driver/`: Rust-based Windows Minifilter.
-- `lexivault_service/`: User-mode daemon for Semantic Preprocessing and Dictionary Training.
-
----
-*LexiVault: The unified developer vault for high-performance transparent data.*
+- `lexivault_lib/`: The core library containing the memory-safe `no_std` hybrid engine and Merkle Tree logic.
+- `lexivault_driver/`: The Rust-based Windows Minifilter driver responsible for real-time I/O handling and buffer management.
+- `lexivault_service/`: A User-Mode diagnostic and optimization service for background Dictionary Training and AST-based semantic preprocessing.
 
 ## 🛠️ Getting Started
 ### Prerequisites
 - [Rust](https://rustup.rs/) (Stable/Nightly)
-- [Enterprise Windows WDK](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) (For driver compilation)
+- [Enterprise Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) for driver compilation.
 
 ### Build & Test
 1. **Core Library**:
@@ -83,3 +81,5 @@ Unlike standard compressors, LexiVault is **Language-Aware**.
 ## ⚖️ License
 LexiVault is provided for educational and research-level kernel development purposes. Ensure you enable **Test-Signing** mode in Windows before attempting to load the driver.
 
+---
+*LexiVault: The unified developer vault for high-performance transparent data.*
